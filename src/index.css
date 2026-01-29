@@ -24,8 +24,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -65,4 +63,98 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+.glass-navbar {
+  position: fixed;
+  top: 18px;
+  left: 0;
+  right: 0;
+  z-index: 60;              /* ABOVE SplashCursor */
+  display: flex;
+  justify-content: center;
+  pointer-events: none;     /* so it doesn't block the cursor effect */
+}
+
+.glass-navbar__inner {
+  width: min(1100px, calc(100% - 32px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 16px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px) saturate(1.6);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  pointer-events: auto;     /* re-enable clicks inside */
+}
+
+.glass-navbar__brand {
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.glass-navbar__links {
+  display: flex;
+  gap: 10px;
+}
+
+.glass-navbar__link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.glass-navbar__link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+.glass-btn__inner {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: none;
+  border: none;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.glass-btn {
+  position: relative;
+  z-index: 80; /* above SplashCursor */
+}
+/* ✅ Make sure the app sits above the SplashCursor canvas */
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  isolation: isolate; /* 🔥 forces a clean stacking context */
+}
+
+.glass-navbar,
+.glass-btn,
+.glass-btn__inner {
+  position: relative;
+  z-index: 5;
 }
