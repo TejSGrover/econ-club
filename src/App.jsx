@@ -107,7 +107,7 @@ function Home() {
                             Join Econ Club
                         </button>
                     </GlassSurface>
-                    
+
                 </div>
             </section>
         </main>

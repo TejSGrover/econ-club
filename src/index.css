@@ -198,3 +198,28 @@ html, body, #root {
     transition: none !important;
   }
 }
+
+/* Glass base */
+.glass-btn,
+.glass-navbar__inner {
+  background: rgba(255, 255, 255, 0.10);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+  backdrop-filter: blur(14px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Chrome fallback if backdrop-filter is disabled */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-btn,
+  .glass-navbar__inner {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+}
+
+.glass-btn,
+.glass-navbar__inner {
+  position: relative;
+  isolation: isolate;          /* key for Chrome */
+  transform: translateZ(0);    /* force compositor layer */
+}
