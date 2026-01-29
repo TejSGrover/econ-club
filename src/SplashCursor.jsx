@@ -881,11 +881,19 @@ function SplashCursor({
         }
 
         function generateColor() {
-            let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-            c.r *= 0.15;
-            c.g *= 0.15;
-            c.b *= 0.15;
-            return c;
+            // pick between Econ Club red & green
+            const red =   { r: 0.18, g: 0.02, b: 0.02 };  // deep red (not neon)
+            const green = { r: 0.02, g: 0.18, b: 0.02 };  // deep green (not neon)
+
+            const c = Math.random() < 0.5 ? red : green;
+
+            // optional: tiny random variation so it feels alive, but still red/green
+            const jitter = 0.03 * (Math.random() - 0.5);
+            return {
+                r: Math.max(0, c.r + jitter),
+                g: Math.max(0, c.g + jitter),
+                b: Math.max(0, c.b + jitter),
+            };
         }
 
         function HSVtoRGB(h, s, v) {

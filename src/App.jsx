@@ -1,17 +1,19 @@
 import SplashCursor from "./SplashCursor";
-import StaggeredMenu from "./StaggeredMenu";
 import GlassSurface from "./GlassSurface";
+import CircularText from './CircularText';
+import LightPillar from "./LightPillar";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 
-function Page({ title, children, center = true }) {
+function Page({ title, children }) {
     return (
         <main
             style={{
-                minHeight: "calc(100vh - 80px)", // subtract navbar height
-                marginTop: "80px",               // push below navbar
+                minHeight: "90vh",
+                paddingTop: "0px", // space for navbar
+                paddingBottom: "100px",
                 display: "grid",
                 placeItems: "center",
-                padding: "0 24px",
+                paddingInline: "24px",
                 color: "white",
             }}
         >
@@ -52,6 +54,17 @@ function Home() {
             }}
         >
             <section style={{ maxWidth: 900, textAlign: "center" }}>
+
+                {/* Circular text above title */}
+                <div style={{ margin: "0 auto 24px", width: 200, height: 200 }}>
+                    <CircularText
+                        text="AES ☆ ECON ☆ CLUB ☆ "
+                        onHover="speedUp"
+                        spinDuration={10}
+                        className="custom-class"
+                    />
+                </div>
+
                 <h1
                     style={{
                         fontSize: "clamp(42px, 6vw, 72px)",
@@ -82,19 +95,19 @@ function Home() {
                         saturation={1.8}
                         className="glass-btn"
                     >
-                        <button className="glass-btn__inner">Join Econ Club</button>
+                        <button
+                            className="glass-btn__inner"
+                            onClick={() =>
+                                window.open(
+                                    "https://classroom.google.com/c/ODI0ODYyMTY4OTEy?cjc=fzv56tsr",
+                                    "_blank"
+                                )
+                            }
+                        >
+                            Join Econ Club
+                        </button>
                     </GlassSurface>
-
-                    <GlassSurface
-                        width={240}
-                        height={64}
-                        borderRadius={18}
-                        backgroundOpacity={1}
-                        saturation={1.8}
-                        className="glass-btn"
-                    >
-                        <button className="glass-btn__inner">Explore Topics</button>
-                    </GlassSurface>
+                    
                 </div>
             </section>
         </main>
@@ -153,17 +166,18 @@ function Investopedia() {
             We use Investopedia as a real time stock simulator.
             <br />
             <br />
+            You will start with $100,000 and you will have until May 28, 2026 to make as much money possible through stock trading.
+            <br />
+            No crypto trading allowed.
+            <br />
+            <br />
+            <br />
             Here are the details for the 2025–26 Semester 2 Investopedia Game –
             <br />
             <br />
             <strong>Game Name:</strong> AES 2526 Sem 2
             <br />
             <strong>Password:</strong> JasveerTrainee
-            <br />
-            <br />
-            You will start with $100,000 and you will have until May 28, 2026 to make as much money possible through stock trading.
-            <br />
-            No crypto trading allowed.
         </Page>
     );
 }
@@ -198,6 +212,22 @@ function Links() {
 export default function App() {
     return (
         <BrowserRouter basename="/econ-club/">
+            {/* ✅ Global background */}
+            <div className="bg-layer">
+                <LightPillar
+                    topColor="#FF0000"
+                    bottomColor="#00FF00"
+                    intensity={1.0}
+                    rotationSpeed={0.25}
+                    glowAmount={0.0009}
+                    pillarWidth={3.0}
+                    pillarHeight={0.4}
+                    noiseIntensity={0.15}
+                    mixBlendMode="screen"
+                    quality="high"
+                />
+            </div>
+
             <SplashCursor />
 
             <div className="glass-navbar">
@@ -244,15 +274,6 @@ export default function App() {
                 </div>
             </div>
 
-            <StaggeredMenu
-                items={[
-                    { label: "Home", link: "/", ariaLabel: "Home" },
-                    { label: "About Us", link: "/about", ariaLabel: "About Us" },
-                    { label: "Investopedia", link: "/investopedia", ariaLabel: "Investopedia" },
-                    { label: "Shark Tank", link: "/shark-tank", ariaLabel: "Shark Tank" },
-                    { label: "Links", link: "/links", ariaLabel: "Links" },
-                ]}
-            />
 
             <Routes>
                 <Route path="/" element={<Home />} />
